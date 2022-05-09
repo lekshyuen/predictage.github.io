@@ -3,10 +3,19 @@
 <head>
 <meta charset="utf-8">
 	<style type="text/css">
+		body {
+			background-color: #f5e6e8;
+		}
 		h1 {
 			border: 2px solid black;
 			text-align: center;
 			width: 95%;
+			background-color: #D5C6E0;
+		}
+		#name,#age,#entered {
+			width: fit-content;
+			background-color: #78E3FD;
+			border: 1px solid black;
 		}
 	</style>
 <title>Predict age</title>
@@ -15,15 +24,16 @@
 <body>
 	<h1>Predict your age based on your name</h1>
 	<form action="?">
-		<p>Your Name:</p>
+		<p id="name">EnterYour Name:</p>
 		<input type="text" name="name">
 		<input type="submit">
 	</form>
-	<p id="name"></p>
+	<p id="entered">Name Entered: </p>
 	<p id="age">Your age is: </p>
 <script>
 const params = new URLSearchParams(window.location.search);
 const age=document.getElementById('age');
+	const entered=document.getElementById('entered');
 var name=params.get('name');
 const url = 'https://api.agify.io/?name='+name;
 
@@ -35,6 +45,7 @@ fetch(url)
   .then(function(data){
 	if (params.has('name')){
 	age.innerHTML+=data.age;
+		entered.innerHTML+=data.name;
 }
 })
 
